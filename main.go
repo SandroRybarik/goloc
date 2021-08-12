@@ -43,38 +43,6 @@ func LocWithoutComments(dat string) int {
 	return locCount
 }
 
-func LocWithoutComments2(dat string) int {
-	locCount := 0
-	isMulti := false
-	isSingle := false
-	// untilNewLine := false
-	isContent := false
-	datlen := len(dat)
-
-	for i := 0; i < datlen; i++ {
-		if isSingle && dat[i] == '\n' {
-			isSingle = false
-		}
-		if dat[i] == '/' && i+1 < datlen && dat[i+1] == '/' {
-			// SINGLE LINE COMMENT
-			isSingle = true
-		} else if dat[i] == '/' && i+1 < datlen && dat[i+1] == '*' {
-			// MULTI_LINE_COMMENT_START
-			isMulti = true
-		} else if dat[i] == '*' && i+1 < datlen && dat[i+1] == '/' {
-			// MULTI_LINE_COMMENT_END
-			isMulti = false
-		} else if !(dat[i] == ' ' || dat[i] == '\n' || dat[i] == '\t') {
-			isContent = true
-			// line should be counted
-		} else if !isMulti && !isSingle && isContent && dat[i] == '\n' {
-			locCount++
-		}
-	}
-
-	return locCount
-}
-
 func main() {
 	if len(os.Args) != 2 {
 		fmt.Println("Invalid number of arguments.")
