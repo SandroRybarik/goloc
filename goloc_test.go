@@ -57,6 +57,18 @@ const z = 10;
 	}
 }
 
+func TestLocCodeWithSingleLineCommentEscaped(t *testing.T) {
+	input := `// Single line comment\
+that continues through 2 lines
+const x = "123";
+`
+
+	ans := LocWithoutComments(input)
+	if ans != 1 {
+		t.Errorf("LocWithoutComments(input) = %d; want 1", ans)
+	}
+}
+
 // Skip to the end of line (Steo)
 func TestSkipToTheEndOfLine(t *testing.T) {
 	input1 := `1234567890`

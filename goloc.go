@@ -2,7 +2,7 @@ package goloc
 
 func SkipToTheEndOfLine(dat string, datlen int, currpos int) int {
 	for i := currpos; i < datlen; i++ {
-		if dat[i] == '\n' {
+		if !(i-1 >= 0 && dat[i-1] == '\\' && dat[i] == '\n') && dat[i] == '\n' {
 			return i - currpos
 		}
 	}
